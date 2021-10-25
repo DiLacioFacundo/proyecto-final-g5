@@ -12,21 +12,30 @@ router
     })
   })
   .post((req, res)=> {
-    res.send('Crear nota');
-  });
-
+    const note = new Note({
+      title: req.body.title,
+      text: req.body.text
+    });
+    note.save((err,note) => {
+      res.json(note);
+    })
+});
 
 router
   .route('/api/notes/:id')
   .get((req, res) => {
-    res.send('Una nota por ID');
+    Note.find({ id: req.params.id}, (err,note)=>{
+      res.json(note);
+    })
   })
   .put((req, res) => {
-    res.send('Actualizar nota');
+    res.send('Actualizar nota')
   })
   .delete((req, res) => {
-    res.send('Borrar nota');
-  })
+    Note.findByIdAndRemove(req.params.id, (err) => {
+      res.json({ msg: 'Nota borrada'});
+    })
+  });
 
 
 module.exports = router;
