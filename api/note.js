@@ -4,13 +4,19 @@ const express= require('express');
 const router = express.Router();
 const Note = require('../models/Note');
 
+
+// router.route('/api/notes');
+// router.route('/api/notes/:id');
+
 router
+  // Buscar todas las notas
   .route('/api/notes')
   .get((req, res) => {
     Note.find((err, notes) => {
       res.json(notes);
     })
   })
+    // Crear nota usando los datos req.body
   .post((req, res)=> {
     const note = new Note({
       title: req.body.title,
@@ -33,7 +39,7 @@ router
   })
   .delete((req, res) => {
     Note.findByIdAndRemove(req.params.id, (err) => {
-      res.json({ msg: 'Nota borrada'});
+      res.jso n({ msg: 'Nota borrada'});
     })
   });
 
