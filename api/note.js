@@ -39,7 +39,7 @@ router
   })
   .delete((req, res) => {
     Note.findByIdAndRemove(req.params.id, (err) => {
-      res.jso n({ msg: 'Nota borrada'});
+      res.json({ msg: 'Nota borrada'});
     })
   });
 
