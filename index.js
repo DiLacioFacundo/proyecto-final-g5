@@ -1,32 +1,22 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.notas{
+  display: flex;
+}
 
 
-const PORT = 4000;
-const DB = 'mongodb://localhost/notasapp';
-
-mongoose.connect(DB).then(()=> console.log('DB conectada'));
-
-const app = express();
-app.use(cors());
-
-app.use(express.json());
-
-app.use('/', require('./api/note'));
-
-
-
-
-//
-// const User = require('./models/User');
-//
-// app.get('/api/users', (req, res) =>{
-//   User.find((err, users) =>{
-//    res.json(users);
-//   });
-// });
-
-app.use(express.static('public'));
-
-app.listen(PORT);
+.notas div{
+  border: 1px solid gray;
+  margin: 10px;
+}
