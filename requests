@@ -5,7 +5,11 @@ curl -X POST -H "Content-Type: application/json" -d '{"text": "algo"}' localhost
 
 #borrar una nota
 
+
+curl -x DELETE localhost/3000/api/notes/6177103e9a7c486c2b4fcdc4
+
+
 #modificar una nota
 
 
-curl -X DELETE localhost:3000/api/notes/616dc0cec6fcda1e1a3e4885
+curl -X PUT -H "Content-Type: application/json" -d '{"title": "PAPU", "text": "algo"}'  localhost:3000/api/notes
