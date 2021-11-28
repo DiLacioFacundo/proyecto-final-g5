@@ -2,43 +2,46 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Nota from './Nota';
+import {Button, Form, Card} from 'react-bootstrap'
+
 const App = () => {
 
   const [notes, setNotes] = useState([]);
 
-  const deleteNote = id => {
-    axios.delete('http://localhost:4000/api/notes/' + id)
-    .then(res => {
-      const notasActualizadas = notes.filter(note => id !== note.id);
-      console.log(notasActualizadas);
-      setNotes(notasActualizadas);
-    })
-    .catch(err => console.log(err));
-  };
+    const deleteNote = id => {
+      axios.delete('http://localhost:4000/api/notes/' + id)
+        .then(res => {
+          const notasActualizadas = notes.filter(note => id !==
+          note._id);
+          console.log(notasActualizadas);
+          setNotes(notasActualizadas);
+        })
+        .catch(err => console.log(err))
+    };
 
-const updateNote = id =>{
-  console.log(id);
-  const tituloActualizado = prompt('ingrese nuevo titulo');
-  const textoActualizado = prompt('ingrese nuevo texto');
-  const datos = {
-    title: tituloActualizado,
-    text: textoActualizado
-  };
-  axios.put('http://localhost:4000/api/notes/' + id, datos)
-  .then(res =>  {
-    const notasActualizadas = notes.map(note =>(
-      note._id === id ? res.data : note
-    ));
-    setNotes(notasActualizadas);
-  })
-  .catch(err => console.log(err));
-};
+    const updateNote = id => {
+      //console.log(id);
+      const titluloActualizado = prompt('Ingrese un nuevo titulo');
+      const textoActualizado = prompt('Ingrese un nuevo texto');
+      const datos = {
+          title: titluloActualizado,
+          text: textoActualizado
+      };
+      axios.put('http://localhost:4000/api/notes/' + id, datos)
+        .then(res => {
+          const notasActualizadas = notes.map(note => (
+            note._id === id ? res.data : note
+          ));
+          setNotes(notasActualizadas);
+        })
+        .catch(err => console.log(err));
+    };
 
   useEffect(() => {
     console.log('Vamos a buscar todas las notas');
     axios.get('http://localhost:4000/api/notes')
       .then(res => {
-      //  console.log(res.data);
+        //console.log(res.data);
         setNotes(res.data);
       });
   }, []);
@@ -62,43 +65,63 @@ const updateNote = id =>{
   };
 
   return (
+    <div className='container'>
     <div className="app">
-      <h1 className="center">Mi app</h1>
+        <h1>Task App</h1>
+
       <div className="agregarNota">
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
+
+      <Card style={{ width: '18rem' }}>
+       <Card.Body>
+        <div className="tittle">
           <label>Titulo</label>
-          <br/>
           <input
             onChange={e => setTitle(e.target.value)}
             value={title}
             type="text"
           />
-          <br/>
+          </div>
+
+          <div className="text">
           <label>Texto</label>
-          <br/>
           <textarea
-            rows="6"
-            cols="40"
-            spellCheck={false}
             onChange={e => setText(e.target.value)}
             value={text}
-            ></textarea>
-            <br/>
-            <inputclassName="btn btn-primary" type="submit"
-            value="Guardar" />
-            </form>
-            </div>
-      <div className="notas">
-        {notas.map(note => {
-          return <Nota
-          key={note._id}
-          id={note._id}
-          title={nottte.title}
-          deleteNote={deleteNote}
-          updateNote={updateNote}
-          text={note.text} />
-        })}
+            name="textarea"
+            rows="10"
+            cols="30">
+            spellCheck={false}
+          </textarea>
+          </div>
+          <div className="button">
+          <input type="submit" className="btn btn-primary" value="Guardar"/>
+          </div>
+          </Card.Body>
+        </Card>
+
+
+
+
+        </Form>
       </div>
+
+      <div className="notas">
+        <h1>Lista de notas</h1>
+        <div className="task">
+        {notes.map(note => {
+          return <Nota title={note.title} text={note.text}
+            key={note._id}
+            id={note._id}
+            title={note.title}
+            deleteNote={deleteNote}
+            updateNote={updateNote}
+            text={note.text} />
+        })}
+        </div>
+      </div>
+
+    </div>
     </div>
   );
 };
