@@ -69,7 +69,7 @@ const App = () => {
     <div className='container'>
     <Navbar style={{background:'#fffff0	', border: '1px solid #fffafa	', margin:'10px'}}>
         <Nav.Link href="#home">
-
+        
     <h1>TASKS APP</h1>
         </Nav.Link>
 
@@ -107,7 +107,7 @@ const App = () => {
           </div>
           <br/>
           <div className="button">
-          <Form.Control type="submit" className="btn btn-primary" value="Guardar"></Form.Control>
+          <Form.Control type="submit" className="btn btn-dark" value="Guardar"></Form.Control>
           </div>
           </Card.Body>
         </Card>
