@@ -21,10 +21,10 @@ const App = () => {
 
     const updateNote = id => {
       //console.log(id);
-      const titluloActualizado = prompt('Ingrese un nuevo titulo');
+      const tituloActualizado = prompt('Ingrese un nuevo titulo');
       const textoActualizado = prompt('Ingrese un nuevo texto');
       const datos = {
-          title: titluloActualizado,
+          title: tituloActualizado,
           text: textoActualizado
       };
       axios.put('http://localhost:4000/api/notes/' + id, datos)
@@ -68,6 +68,9 @@ const App = () => {
     <div className='container'>
     <div className="app">
         <h1>Task App</h1>
+        <br/>
+
+          <br/>
 
       <div className="agregarNota">
         <Form onSubmit={handleSubmit}>
@@ -76,6 +79,7 @@ const App = () => {
        <Card.Body>
         <div className="tittle">
           <label>Titulo</label>
+          <br/>
           <input
             onChange={e => setTitle(e.target.value)}
             value={title}
@@ -107,7 +111,11 @@ const App = () => {
       </div>
 
       <div className="notas">
+        <br/>
         <h1>Lista de notas</h1>
+          <br/>
+
+        <Card style={{width: '50rem'}}>
         <div className="task">
         {notes.map(note => {
           return <Nota title={note.title} text={note.text}
@@ -119,6 +127,7 @@ const App = () => {
             text={note.text} />
         })}
         </div>
+        </Card>
       </div>
 
     </div>
