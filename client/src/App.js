@@ -2,7 +2,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Nota from './Nota';
-import {Button, Form, Card} from 'react-bootstrap'
+import {Button, Form, Card, Navbar, Nav} from 'react-bootstrap'
+import ico from './assets/img/ico.png';
 
 const App = () => {
 
@@ -66,19 +67,24 @@ const App = () => {
 
   return (
     <div className='container'>
-    <div className="app">
-        <h1>Task App</h1>
-        <br/>
+    <Navbar style={{background:'#fffff0	', border: '1px solid #fffafa	', margin:'10px'}}>
+        <Nav.Link href="#home">
 
+    <h1>TASKS APP</h1>
+        </Nav.Link>
+
+
+      </Navbar>
+        <br/>
           <br/>
 
       <div className="agregarNota">
         <Form onSubmit={handleSubmit}>
 
-      <Card style={{ width: '18rem' }}>
+      <Card style={{ width: '328px', top:'50px'}}>
        <Card.Body>
         <div className="tittle">
-          <label>Titulo</label>
+          <Form.Label>Titulo:</Form.Label>
           <br/>
           <input
             onChange={e => setTitle(e.target.value)}
@@ -86,9 +92,10 @@ const App = () => {
             type="text"
           />
           </div>
-
+          <br/>
           <div className="text">
-          <label>Texto</label>
+          <br/>
+          <Form.Label>Texto:</Form.Label>
           <textarea
             onChange={e => setText(e.target.value)}
             value={text}
@@ -98,41 +105,34 @@ const App = () => {
             spellCheck={false}
           </textarea>
           </div>
+          <br/>
           <div className="button">
-          <input type="submit" className="btn btn-primary" value="Guardar"/>
+          <Form.Control type="submit" className="btn btn-primary" value="Guardar"></Form.Control>
           </div>
           </Card.Body>
         </Card>
-
-
-
-
         </Form>
       </div>
 
-      <div className="notas">
-        <br/>
-        <h1>Lista de notas</h1>
-          <br/>
+            <Card style={{width: '45rem', border: '1px solid #e6e6fa', float: 'right', bottom:'435px', left:'3px'}}>
+            <Form.Group className="task">
+            {notes.map(note => {
+              return <Nota title={note.title} text={note.text}
+                key={note._id}
+                id={note._id}
+                title={note.title}
+                deleteNote={deleteNote}
+                updateNote={updateNote}
+                text={note.text} />
+            })}
+            </Form.Group>
+          </Card>
 
-        <Card style={{width: '50rem'}}>
-        <div className="task">
-        {notes.map(note => {
-          return <Nota title={note.title} text={note.text}
-            key={note._id}
-            id={note._id}
-            title={note.title}
-            deleteNote={deleteNote}
-            updateNote={updateNote}
-            text={note.text} />
-        })}
-        </div>
-        </Card>
-      </div>
 
-    </div>
+
     </div>
   );
 };
 
+        //  <img src={} alt=""/>
 export default App;
