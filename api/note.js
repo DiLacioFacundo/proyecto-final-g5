@@ -33,7 +33,13 @@ router
     });
   })
   .put((req, res) => {
-    Note.findByIdAndUpdate(req.params.id).exec((err, note) => {
+    const options = {
+      new : true,
+      omitUndefined: true
+    };
+    const { title, text } = req.body;
+    const note = { text, title }
+    Note.findByIdAndUpdate(req.params.id, note, options).exec((err, note) => {
       if (err) return next(err);
       if (!note) return res.status(404).json({ msg: 'Not found' });
       res.status(200).json(note);

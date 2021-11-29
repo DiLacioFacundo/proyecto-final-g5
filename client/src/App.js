@@ -21,7 +21,7 @@ const App = () => {
     };
 
     const updateNote = id => {
-      //console.log(id);
+      console.log(id);
       const tituloActualizado = prompt('Ingrese un nuevo titulo');
       const textoActualizado = prompt('Ingrese un nuevo texto');
       const datos = {
@@ -33,6 +33,7 @@ const App = () => {
           const notasActualizadas = notes.map(note => (
             note._id === id ? res.data : note
           ));
+          console.log(res.data);
           setNotes(notasActualizadas);
         })
         .catch(err => console.log(err));
@@ -67,9 +68,9 @@ const App = () => {
 
   return (
     <div className='container'>
-    <Navbar style={{background:'#fffff0	', border: '1px solid #fffafa	', margin:'10px'}}>
+    <Navbar style={{background:'#C1BEB3', border: '1px solid #fffafa	', margin:'10px'}}>
         <Nav.Link href="#home">
-        
+
     <h1>TASKS APP</h1>
         </Nav.Link>
 
