@@ -41,7 +41,8 @@ code {
 }
 
 .nota p {
-  font-family: serif;
+  font-family: Monaco;
+  font-size:
 }
 
 .nota button{
@@ -63,4 +64,11 @@ form {
 
 form label {
   margin-top: 10px;
+}
+
+
+.button{
+  display: flex;
+  border: 40px;
+  text-align: center;
 }
